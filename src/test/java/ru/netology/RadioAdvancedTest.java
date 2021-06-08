@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RadioAdvancedTest {
 
-    @Test //прошел
+    @Test
     public void shouldGetAndSet() {
         RadioAdvanced radio = new RadioAdvanced();
         String expected = "radioMaximum";
@@ -139,12 +139,12 @@ class RadioAdvancedTest {
 
     }
 
-    @Test //прошел
+    @Test
     public void shouldCreate() {
         RadioAdvanced Radio = new RadioAdvanced();
     }
 
-    @Test //прошел
+    @Test
     public void shouldInitField() {
         RadioAdvanced Radio = new RadioAdvanced();
         assertNull(Radio.getName());
@@ -157,14 +157,14 @@ class RadioAdvancedTest {
         assertFalse(Radio.isOn());
     }
 
-    @Test //прошел
+    @Test
     @Disabled
     public void shouldThrowNPE() {
         Radio radio = new Radio();
         assertEquals(0, radio.name.length());
     }
 
-    @Test //прошел
+    @Test
     public void shouldChangeFields() {
         Radio radio = new Radio();
         assertEquals(0, radio.currentStation);
