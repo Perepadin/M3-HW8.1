@@ -78,41 +78,39 @@ public class RadioAdvanced {
         MinVolumeLevel = minVolumeLevel;
     }
 
-    public int increaseVolume() {
+    public void volumeUpForOne() {
+
+        if (currentVolume == MaxVolumeLevel) {
+            this.currentVolume = currentVolume;
+        }
         if (currentVolume < MaxVolumeLevel) {
-            currentVolume = currentVolume + 1;
+            this.currentVolume++;
         }
-        return currentVolume;
     }
 
-    public int decreaseVolume() {
-        if (currentVolume <= MaxVolumeLevel) {
-            currentVolume = currentVolume - 1;
+    public void volumeDownForOne() {
+        if (currentVolume == MinVolumeLevel) {
+            this.currentVolume = currentVolume;
         }
-        if (currentVolume <= MinVolumeLevel) {
-            currentVolume = 0;
+        if (currentVolume > MinVolumeLevel) {
+            this.currentVolume--;
         }
-        return currentVolume;
     }
 
-    public int increaseStation() {
-        if (currentStation <= MaxStation) {
-            currentStation = currentStation + 1;
+    public void changeOnPreviousRadioStation() {
+        if (currentStation == MinStation) {
+            this.currentStation = 9;
+            return;
         }
-        if (currentStation > 9) {
-            currentStation = 0;
-        }
-        return currentStation;
+        this.currentStation--;
     }
 
-    public int decreaseStation() {
-        if (currentStation <= MaxStation) {
-            currentStation = currentStation - 1;
-            if (currentStation < MinStation) {
-                currentStation = 9;
-            }
+    public void changeOnNextRadioStation() {
+        if (currentStation == MaxStation) {
+            this.currentStation = 0;
+            return;
         }
-        return currentStation;
+        this.currentStation++;
     }
 
     public boolean isOn() {
