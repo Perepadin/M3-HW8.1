@@ -1,21 +1,38 @@
 package ru.netology;
 
 public class RadioAdvanced {
-    private String name;
+    private int numbersOfStations = 10;
     private int currentStation = 0;
-    private int MaxStation = 9;
+    private int MaxStation = numbersOfStations;
     private int MinStation = 0;
     private int currentVolume = 0;
-    private int MaxVolumeLevel = 10;
+    private int MaxVolumeLevel = 100;
     private int MinVolumeLevel = 0;
-    private boolean on;
 
-    public String getName() {
-        return name;
+    public RadioAdvanced() {
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public RadioAdvanced(int numbersOfStations, int currentStation, int maxStation, int minStation, int currentVolume, int maxVolumeLevel, int minVolumeLevel) {
+        this.numbersOfStations = numbersOfStations;
+        this.currentStation = currentStation;
+        MaxStation = maxStation;
+        MinStation = minStation;
+        this.currentVolume = currentVolume;
+        MaxVolumeLevel = maxVolumeLevel;
+        MinVolumeLevel = minVolumeLevel;
+    }
+
+    public RadioAdvanced(int currentStation, int currentVolume) {
+        this.currentStation = currentStation;
+        this.currentVolume = currentVolume;
+    }
+
+    public int getNumbersOfStations() {
+        return numbersOfStations;
+    }
+
+    public void setNumbersOfStations(int numbersOfStations) {
+        this.numbersOfStations = numbersOfStations;
     }
 
     public int getCurrentStation() {
@@ -99,7 +116,7 @@ public class RadioAdvanced {
 
     public void changeOnPreviousRadioStation() {
         if (currentStation == MinStation) {
-            this.currentStation = 9;
+            this.currentStation = 10;
             return;
         }
         this.currentStation--;
@@ -113,7 +130,4 @@ public class RadioAdvanced {
         this.currentStation++;
     }
 
-    public boolean isOn() {
-        return on;
-    }
 }
