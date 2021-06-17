@@ -17,9 +17,8 @@ public class RadioAdvanced {
     private int MaxVolumeLevel = 100;
     private int MinVolumeLevel = 0;
 
-    public RadioAdvanced(int currentStation, int currentVolume) {
-        this.currentStation = currentStation;
-        this.currentVolume = currentVolume;
+    public RadioAdvanced(int numbersOfStations) {
+        this.numbersOfStations = numbersOfStations;
     }
 
     public void setCurrentStation(int currentStation) {
