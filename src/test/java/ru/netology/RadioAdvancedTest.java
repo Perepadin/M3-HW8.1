@@ -9,17 +9,14 @@ class RadioAdvancedTest {
 
     @Test
     void shouldSetNumbersOfStation() {
-        RadioAdvanced radio = new RadioAdvanced();
-        int numbersOfStations = 10;
-        radio.setNumbersOfStations(numbersOfStations);
+        RadioAdvanced radio = new RadioAdvanced(10);
         assertEquals(10, radio.getNumbersOfStations());
     }
 
     @Test
     void shouldSetCurrentRadioStationBackToZero() {
         RadioAdvanced radio = new RadioAdvanced();
-        int currentStation = 15;
-        radio.setCurrentStation(currentStation);
+        radio.setCurrentStation(15);
         assertEquals(0, radio.getCurrentStation());
     }
 
@@ -54,28 +51,35 @@ class RadioAdvancedTest {
 
     @Test
     void shouldChangeOnPreviousRadioStationIfStationIsMin() {
-        RadioAdvanced radio = new RadioAdvanced(0, 0);
+        RadioAdvanced radio = new RadioAdvanced();
+        int currentStation = 0;
         radio.changeOnPreviousRadioStation();
         assertEquals(10, radio.getCurrentStation());
     }
 
     @Test
     void shouldNotChangeOnNextRadioStationIfStationIsMax() {
-        RadioAdvanced radio = new RadioAdvanced(10, 0);
+        RadioAdvanced radio = new RadioAdvanced();
+        int currentStation = 10;
+        radio.setCurrentStation(currentStation);
         radio.changeOnNextRadioStation();
         assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
     void shouldChangeOnPreviousRadioStation() {
-        RadioAdvanced radio = new RadioAdvanced(1, 0);
+        RadioAdvanced radio = new RadioAdvanced();
+        int currentStation = 10;
+        radio.setCurrentStation(currentStation);
         radio.changeOnPreviousRadioStation();
-        assertEquals(0, radio.getCurrentStation());
+        assertEquals(9, radio.getCurrentStation());
     }
 
     @Test
     void shouldChangeOnNextRadioStation() {
-        RadioAdvanced radio = new RadioAdvanced(8, 0);
+        RadioAdvanced radio = new RadioAdvanced();
+        int currentStation = 8;
+        radio.setCurrentStation(currentStation);
         radio.changeOnNextRadioStation();
         assertEquals(9, radio.getCurrentStation());
     }
@@ -83,42 +87,50 @@ class RadioAdvancedTest {
     @Test
     void shouldNotSetVolumeIfVolumeIsOverMax() {
         RadioAdvanced radio = new RadioAdvanced();
-        int currentVolume = 150;
-        radio.setCurrentVolume(currentVolume);
+        radio.setCurrentVolume(150);
         assertEquals(0, radio.getCurrentVolume());
     }
 
     @Test
     void shouldNotSetVolumeIfVolumeIsUnderMin() {
         RadioAdvanced radio = new RadioAdvanced();
-        radio.setCurrentVolume(-100);
+        int currentVolume = -100;
+        radio.setCurrentVolume(currentVolume);
         assertEquals(0, radio.getCurrentVolume());
     }
 
     @Test
     void shouldNotChangeVolumeIfVolumeIsMax() {
-        RadioAdvanced radio = new RadioAdvanced(0, 100);
+        RadioAdvanced radio = new RadioAdvanced();
+        int currentVolume = 100;
+        radio.setCurrentVolume(currentVolume);
         radio.volumeUpForOne();
         assertEquals(100, radio.getCurrentVolume());
     }
 
     @Test
     void shouldNotChangeVolumeIfVolumeIsMin() {
-        RadioAdvanced radio = new RadioAdvanced(0, 0);
+        RadioAdvanced radio = new RadioAdvanced();
+        int currentVolume = 0;
         radio.volumeDownForOne();
+        radio.setCurrentVolume(currentVolume);
         assertEquals(0, radio.getCurrentVolume());
     }
 
     @Test
     void volumeUpForOne() {
-        RadioAdvanced radio = new RadioAdvanced(0, 8);
+        RadioAdvanced radio = new RadioAdvanced();
+        int currentVolume = 8;
+        radio.setCurrentVolume(currentVolume);
         radio.volumeUpForOne();
         assertEquals(9, radio.getCurrentVolume());
     }
 
     @Test
     void volumeDownForOne() {
-        RadioAdvanced radio = new RadioAdvanced(0, 7);
+        RadioAdvanced radio = new RadioAdvanced();
+        int currentVolume = 7;
+        radio.setCurrentVolume(currentVolume);
         radio.volumeDownForOne();
         assertEquals(6, radio.getCurrentVolume());
     }
@@ -144,7 +156,7 @@ class RadioAdvancedTest {
 
     @Test
     public void shouldUseArgsConstructor() {
-        RadioAdvanced Radio = new RadioAdvanced(10, 0, 10, 0, 0, 100, 0);
+        RadioAdvanced Radio = new RadioAdvanced();
         assertEquals(10, Radio.getNumbersOfStations());
         assertEquals(10, Radio.getMaxStation());
         assertEquals(0, Radio.getMinStation());

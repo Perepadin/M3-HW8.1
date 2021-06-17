@@ -12,19 +12,8 @@ public class RadioAdvanced {
     public RadioAdvanced() {
     }
 
-    public RadioAdvanced(int numbersOfStations, int currentStation, int maxStation, int minStation, int currentVolume, int maxVolumeLevel, int minVolumeLevel) {
+    public RadioAdvanced(int numbersOfStations) {
         this.numbersOfStations = numbersOfStations;
-        this.currentStation = currentStation;
-        MaxStation = maxStation;
-        MinStation = minStation;
-        this.currentVolume = currentVolume;
-        MaxVolumeLevel = maxVolumeLevel;
-        MinVolumeLevel = minVolumeLevel;
-    }
-
-    public RadioAdvanced(int currentStation, int currentVolume) {
-        this.currentStation = currentStation;
-        this.currentVolume = currentVolume;
     }
 
     public int getNumbersOfStations() {
