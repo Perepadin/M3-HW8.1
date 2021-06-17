@@ -1,7 +1,6 @@
 package ru.netology;
 
 public class Radio {
-    String name;
     int numberOfStations = 10;
     int currentStation = 0;
     int MaxStation = 9;
@@ -10,5 +9,4 @@ public class Radio {
     int MaxVolumeLevel = 10;
     int MinVolumeLevel = 0;
     boolean on;
-
 }

@@ -1,6 +1,5 @@
 package ru.netology;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -51,9 +50,9 @@ class RadioAdvancedTest {
         assertEquals(10, radio.getCurrentStation());
     }
 
-
     @Test
     void shouldChangeOnPreviousRadioStationIfStationIsMin() {
+
         RadioAdvanced radio = new RadioAdvanced(0, 0);
         radio.changeOnPreviousRadioStation();
         assertEquals(10, radio.getCurrentStation());
@@ -139,26 +138,19 @@ class RadioAdvancedTest {
 
     @Test
     public void shouldCreate() {
-        RadioAdvanced Radio = new RadioAdvanced();
+        RadioAdvanced radio = new RadioAdvanced();
     }
 
     @Test
     public void shouldUseArgsConstructor() {
-        RadioAdvanced Radio = new RadioAdvanced(10, 0, 10, 0, 0, 100, 0);
-        assertEquals(10, Radio.getNumbersOfStations());
-        assertEquals(10, Radio.getMaxStation());
-        assertEquals(0, Radio.getMinStation());
-        assertEquals(0, Radio.getCurrentStation());
-        assertEquals(100, Radio.getMaxVolumeLevel());
-        assertEquals(0, Radio.getMinVolumeLevel());
-        assertEquals(0, Radio.getCurrentVolume());
-    }
-
-    @Test
-    @Disabled
-    public void shouldThrowNPE() {
-        Radio radio = new Radio();
-        assertEquals(0, radio.name.length());
+        RadioAdvanced radioAdvanced = new RadioAdvanced(10, 0, 10, 0, 0, 100, 0);
+        assertEquals(10, radioAdvanced.getNumbersOfStations());
+        assertEquals(10, radioAdvanced.getMaxStation());
+        assertEquals(0, radioAdvanced.getMinStation());
+        assertEquals(0, radioAdvanced.getCurrentStation());
+        assertEquals(100, radioAdvanced.getMaxVolumeLevel());
+        assertEquals(0, radioAdvanced.getMinVolumeLevel());
+        assertEquals(0, radioAdvanced.getCurrentVolume());
     }
 
     @Test
@@ -168,4 +160,4 @@ class RadioAdvancedTest {
         radio.currentStation = 5;
         assertEquals(5, radio.currentStation);
     }
-}
+    }
