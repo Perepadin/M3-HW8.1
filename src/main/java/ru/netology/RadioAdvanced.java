@@ -1,27 +1,14 @@
 package ru.netology;
 
 public class RadioAdvanced {
-    private int numbersOfStations = 10;
     private int currentStation = 0;
-    private int MaxStation = numbersOfStations;
-    private int MinStation = 0;
+    private int maxStation = 9;
+    private int minStation = 0;
     private int currentVolume = 0;
-    private int MaxVolumeLevel = 100;
-    private int MinVolumeLevel = 0;
+    private int maxVolumeLevel = 100;
+    private int minVolumeLevel = 0;
 
     public RadioAdvanced() {
-    }
-
-    public RadioAdvanced(int numbersOfStations) {
-        this.numbersOfStations = numbersOfStations;
-    }
-
-    public int getNumbersOfStations() {
-        return numbersOfStations;
-    }
-
-    public void setNumbersOfStations(int numbersOfStations) {
-        this.numbersOfStations = numbersOfStations;
     }
 
     public int getCurrentStation() {
@@ -29,29 +16,29 @@ public class RadioAdvanced {
     }
 
     public void setCurrentStation(int currentStation) {
-        if (currentStation > MaxStation) {
+        if (currentStation > maxStation) {
             return;
         }
-        if (currentStation < MinStation) {
+        if (currentStation < minStation) {
             return;
         }
         this.currentStation = currentStation;
     }
 
     public int getMaxStation() {
-        return MaxStation;
+        return maxStation;
     }
 
     public void setMaxStation(int maxStation) {
-        MaxStation = maxStation;
+        maxStation = maxStation;
     }
 
     public int getMinStation() {
-        return MinStation;
+        return minStation;
     }
 
     public void setMinStation(int minStation) {
-        MinStation = minStation;
+        minStation = minStation;
     }
 
     public int getCurrentVolume() {
@@ -59,60 +46,60 @@ public class RadioAdvanced {
     }
 
     public void setCurrentVolume(int currentVolume) {
-        if (currentVolume > MaxVolumeLevel) {
+        if (currentVolume > maxVolumeLevel) {
             return;
         }
-        if (currentVolume < MinVolumeLevel) {
+        if (currentVolume < minVolumeLevel) {
             return;
         }
         this.currentVolume = currentVolume;
     }
 
     public int getMaxVolumeLevel() {
-        return MaxVolumeLevel;
+        return maxVolumeLevel;
     }
 
     public void setMaxVolumeLevel(int maxVolumeLevel) {
-        MaxVolumeLevel = maxVolumeLevel;
+        maxVolumeLevel = maxVolumeLevel;
     }
 
     public int getMinVolumeLevel() {
-        return MinVolumeLevel;
+        return minVolumeLevel;
     }
 
     public void setMinVolumeLevel(int minVolumeLevel) {
-        MinVolumeLevel = minVolumeLevel;
+        minVolumeLevel = minVolumeLevel;
     }
 
     public void volumeUpForOne() {
 
-        if (currentVolume == MaxVolumeLevel) {
+        if (currentVolume == maxVolumeLevel) {
             this.currentVolume = currentVolume;
         }
-        if (currentVolume < MaxVolumeLevel) {
+        if (currentVolume < maxVolumeLevel) {
             this.currentVolume++;
         }
     }
 
     public void volumeDownForOne() {
-        if (currentVolume == MinVolumeLevel) {
+        if (currentVolume == minVolumeLevel) {
             this.currentVolume = currentVolume;
         }
-        if (currentVolume > MinVolumeLevel) {
+        if (currentVolume > minVolumeLevel) {
             this.currentVolume--;
         }
     }
 
     public void changeOnPreviousRadioStation() {
-        if (currentStation == MinStation) {
-            this.currentStation = 10;
+        if (currentStation == minStation) {
+            this.currentStation = 9;
             return;
         }
         this.currentStation--;
     }
 
     public void changeOnNextRadioStation() {
-        if (currentStation == MaxStation) {
+        if (currentStation == maxStation) {
             this.currentStation = 0;
             return;
         }

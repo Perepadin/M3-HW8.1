@@ -8,12 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class RadioAdvancedTest {
 
     @Test
-    void shouldSetNumbersOfStation() {
-        RadioAdvanced radio = new RadioAdvanced(10);
-        assertEquals(10, radio.getNumbersOfStations());
-    }
-
-    @Test
     void shouldSetCurrentRadioStationBackToZero() {
         RadioAdvanced radio = new RadioAdvanced();
         radio.setCurrentStation(15);
@@ -44,8 +38,8 @@ class RadioAdvancedTest {
     @Test
     void shouldSetStationsIfStationsIsMax() {
         RadioAdvanced radio = new RadioAdvanced();
-        radio.setCurrentStation(10);
-        assertEquals(10, radio.getCurrentStation());
+        radio.setCurrentStation(9);
+        assertEquals(9, radio.getCurrentStation());
     }
 
 
@@ -54,13 +48,13 @@ class RadioAdvancedTest {
         RadioAdvanced radio = new RadioAdvanced();
         int currentStation = 0;
         radio.changeOnPreviousRadioStation();
-        assertEquals(10, radio.getCurrentStation());
+        assertEquals(9, radio.getCurrentStation());
     }
 
     @Test
-    void shouldNotChangeOnNextRadioStationIfStationIsMax() {
+    void shouldChangeOnNextRadioStationIfStationIsMax() {
         RadioAdvanced radio = new RadioAdvanced();
-        int currentStation = 10;
+        int currentStation = 9;
         radio.setCurrentStation(currentStation);
         radio.changeOnNextRadioStation();
         assertEquals(0, radio.getCurrentStation());
@@ -69,10 +63,10 @@ class RadioAdvancedTest {
     @Test
     void shouldChangeOnPreviousRadioStation() {
         RadioAdvanced radio = new RadioAdvanced();
-        int currentStation = 10;
+        int currentStation = 8;
         radio.setCurrentStation(currentStation);
         radio.changeOnPreviousRadioStation();
-        assertEquals(9, radio.getCurrentStation());
+        assertEquals(7, radio.getCurrentStation());
     }
 
     @Test
@@ -157,8 +151,7 @@ class RadioAdvancedTest {
     @Test
     public void shouldUseArgsConstructor() {
         RadioAdvanced Radio = new RadioAdvanced();
-        assertEquals(10, Radio.getNumbersOfStations());
-        assertEquals(10, Radio.getMaxStation());
+        assertEquals(9, Radio.getMaxStation());
         assertEquals(0, Radio.getMinStation());
         assertEquals(0, Radio.getCurrentStation());
         assertEquals(100, Radio.getMaxVolumeLevel());
