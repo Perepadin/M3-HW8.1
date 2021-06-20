@@ -8,6 +8,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class RadioAdvancedTest {
 
     @Test
+    void shouldCheckNumbersOfStation() {
+        RadioAdvanced radio = new RadioAdvanced(10);
+        assertEquals(10, radio.getNumberOfStations());
+    }
+
+    @Test
     void shouldSetCurrentRadioStationBackToZero() {
         RadioAdvanced radio = new RadioAdvanced();
         radio.setCurrentStation(15);

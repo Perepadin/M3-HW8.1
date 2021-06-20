@@ -1,6 +1,7 @@
 package ru.netology;
 
 public class RadioAdvanced {
+    private int numberOfStations = 10;
     private int currentStation = 0;
     private int maxStation = 9;
     private int minStation = 0;
@@ -8,7 +9,19 @@ public class RadioAdvanced {
     private int maxVolumeLevel = 100;
     private int minVolumeLevel = 0;
 
+    public RadioAdvanced(int numberOfStations) {
+        this.numberOfStations = numberOfStations;
+    }
+
     public RadioAdvanced() {
+    }
+
+    public int getNumberOfStations() {
+        return numberOfStations;
+    }
+
+    public void setNumberOfStations(int numberOfStations) {
+        this.numberOfStations = numberOfStations;
     }
 
     public int getCurrentStation() {
