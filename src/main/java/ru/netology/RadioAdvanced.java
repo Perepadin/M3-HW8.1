@@ -3,7 +3,7 @@ package ru.netology;
 public class RadioAdvanced {
     private int numberOfStations = 10;
     private int currentStation = 0;
-    private int maxStation = 9;
+    private int maxStation = numberOfStations - 1;
     private int minStation = 0;
     private int currentVolume = 0;
     private int maxVolumeLevel = 100;
@@ -105,7 +105,7 @@ public class RadioAdvanced {
 
     public void changeOnPreviousRadioStation() {
         if (currentStation == minStation) {
-            this.currentStation = 9;
+            this.currentStation = numberOfStations - 1;
             return;
         }
         this.currentStation--;
@@ -118,5 +118,4 @@ public class RadioAdvanced {
         }
         this.currentStation++;
     }
-
 }
