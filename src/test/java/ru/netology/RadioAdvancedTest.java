@@ -15,35 +15,35 @@ class RadioAdvancedTest {
 
     @Test
     void shouldSetCurrentRadioStationBackToZero() {
-        RadioAdvanced radio = new RadioAdvanced();
+        RadioAdvanced radio = new RadioAdvanced(10);
         radio.setCurrentStation(15);
         assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
     void shouldNotSetStationsIfStationsIsOverMax() {
-        RadioAdvanced radio = new RadioAdvanced();
+        RadioAdvanced radio = new RadioAdvanced(10);
         radio.setCurrentStation(150);
         assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
     void shouldNotSetStationsIfStationsIsUnderMin() {
-        RadioAdvanced radio = new RadioAdvanced();
+        RadioAdvanced radio = new RadioAdvanced(10);
         radio.setCurrentStation(-99);
         assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
     void shouldSetStationsIfStationsIsMin() {
-        RadioAdvanced radio = new RadioAdvanced();
+        RadioAdvanced radio = new RadioAdvanced(10);
         radio.setCurrentStation(0);
         assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
     void shouldSetStationsIfStationsIsMax() {
-        RadioAdvanced radio = new RadioAdvanced();
+        RadioAdvanced radio = new RadioAdvanced(10);
         radio.setCurrentStation(9);
         assertEquals(9, radio.getCurrentStation());
     }
@@ -51,7 +51,7 @@ class RadioAdvancedTest {
 
     @Test
     void shouldChangeOnPreviousRadioStationIfStationIsMin() {
-        RadioAdvanced radio = new RadioAdvanced();
+        RadioAdvanced radio = new RadioAdvanced(10);
         int currentStation = 0;
         radio.changeOnPreviousRadioStation();
         assertEquals(9, radio.getCurrentStation());
@@ -59,7 +59,7 @@ class RadioAdvancedTest {
 
     @Test
     void shouldChangeOnNextRadioStationIfStationIsMax() {
-        RadioAdvanced radio = new RadioAdvanced();
+        RadioAdvanced radio = new RadioAdvanced(10);
         int currentStation = 9;
         radio.setCurrentStation(currentStation);
         radio.changeOnNextRadioStation();
@@ -68,7 +68,7 @@ class RadioAdvancedTest {
 
     @Test
     void shouldChangeOnPreviousRadioStation() {
-        RadioAdvanced radio = new RadioAdvanced();
+        RadioAdvanced radio = new RadioAdvanced(10);
         int currentStation = 8;
         radio.setCurrentStation(currentStation);
         radio.changeOnPreviousRadioStation();
@@ -77,7 +77,7 @@ class RadioAdvancedTest {
 
     @Test
     void shouldChangeOnNextRadioStation() {
-        RadioAdvanced radio = new RadioAdvanced();
+        RadioAdvanced radio = new RadioAdvanced(10);
         int currentStation = 8;
         radio.setCurrentStation(currentStation);
         radio.changeOnNextRadioStation();
