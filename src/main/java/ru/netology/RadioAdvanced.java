@@ -3,7 +3,6 @@ package ru.netology;
 public class RadioAdvanced {
     private int numberOfStations = 10;
     private int currentStation = 0;
-    private int maxStation = 9;
     private int minStation = 0;
     private int currentVolume = 0;
     private int maxVolumeLevel = 100;
@@ -21,6 +20,9 @@ public class RadioAdvanced {
     }
 
     public void setNumberOfStations(int numberOfStations) {
+        if (numberOfStations < 0) {
+            return;
+        }
         this.numberOfStations = numberOfStations;
     }
 
@@ -29,21 +31,34 @@ public class RadioAdvanced {
     }
 
     public void setCurrentStation(int currentStation) {
-        if (currentStation > maxStation) {
+        if (currentStation > numberOfStations) {
             return;
         }
         if (currentStation < minStation) {
             return;
         }
+        if (currentStation == numberOfStations) {
+            this.currentStation = numberOfStations -1;
+            return;
+        }
         this.currentStation = currentStation;
     }
 
-    public int getMaxStation() {
-        return maxStation;
+    public void changeOnPreviousRadioStation() {
+        if (currentStation == minStation) {
+            this.currentStation = numberOfStations - 1;
+            return;
+        }
+        this.currentStation--;
     }
 
-    public void setMaxStation(int maxStation) {
-        maxStation = maxStation;
+    public void changeOnNextRadioStation() {
+        if (currentStation == numberOfStations - 1) {
+            this.currentStation = minStation;
+            return;
+        }
+
+        this.currentStation++;
     }
 
     public int getMinStation() {
@@ -102,20 +117,6 @@ public class RadioAdvanced {
             this.currentVolume--;
         }
     }
-
-    public void changeOnPreviousRadioStation() {
-        if (currentStation == minStation) {
-            this.currentStation = 9;
-            return;
-        }
-        this.currentStation--;
-    }
-
-    public void changeOnNextRadioStation() {
-        if (currentStation == maxStation) {
-            this.currentStation = 0;
-            return;
-        }
-        this.currentStation++;
-    }
 }
+
+
