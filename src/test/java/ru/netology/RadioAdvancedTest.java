@@ -8,135 +8,259 @@ import static org.junit.jupiter.api.Assertions.*;
 class RadioAdvancedTest {
 
     @Test
-    public void shouldGetAndSet() {
-        RadioAdvanced radio = new RadioAdvanced();
-        String expected = "radioMaximum";
-
-        assertNull(radio.getName());
-        radio.setName(expected);
-        assertEquals(expected, radio.getName());
+        //тест на проверка количества станций
+    void shouldCheckNumbersOfStation() {
+        RadioAdvanced radio = new RadioAdvanced(5);
+        assertEquals(5, radio.getNumberOfStations());
     }
 
     @Test
-    void shouldSetCurrentRadioStationBackToZero() {
-        RadioAdvanced radio = new RadioAdvanced();
-        int currentStation = 10;
-        radio.setCurrentStation(currentStation);
-        int expected = 0;
-        assertEquals(expected, radio.getCurrentStation());
+        //тест на установку количества станций ниже значения количества станций по умолчанию
+    void shouldSetNumbersOfStation() {
+        RadioAdvanced radio = new RadioAdvanced(10);
+        radio.setNumberOfStations(5);
+        assertEquals(5, radio.getNumberOfStations());
     }
 
     @Test
-    void shouldSetCurrentRadioStation() {
-        RadioAdvanced radio = new RadioAdvanced();
-        int currentStation = -99;
-        radio.setCurrentStation(currentStation);
-        int expected = 0;
-        assertEquals(expected, radio.getCurrentStation());
-
+        //тест на установку количества станций выше значения количества станций по умолчанию
+    void shouldSetNumbersOfStationOverMax() {
+        RadioAdvanced radio = new RadioAdvanced(10);
+        radio.setNumberOfStations(15);
+        assertEquals(15, radio.getNumberOfStations());
     }
 
     @Test
+        //тест на установку отрицательного количества станций
+    void shouldNotSetNumbersOfStationWithNegativeValues() {
+        RadioAdvanced radio = new RadioAdvanced(5);
+        radio.setNumberOfStations(-10);
+        assertEquals(5, radio.getNumberOfStations());
+    }
+
+    @Test
+        //тест на обнуление станции при значении выше макс.количества станций
+    void shouldNotSetStationsIfStationsIsOverMax() {
+        RadioAdvanced radio = new RadioAdvanced(90);
+        radio.setCurrentStation(100);
+        assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+        //тест на обнуление станции при значении станции ниже мин.станции
+    void shouldNotSetStationsIfStationsIsUnderMin() {
+        RadioAdvanced radio = new RadioAdvanced(50);
+        radio.setCurrentStation(-99);
+        assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+        // тест на выставление станции равной мин.станции
+    void shouldSetStationsIfStationsIsMin() {
+        RadioAdvanced radio = new RadioAdvanced(5);
+        radio.setCurrentStation(0);
+        assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+        // тест на выставление станции равной макс.станции
+    void shouldSetStationsIfStationsIsMax() {
+        RadioAdvanced radio = new RadioAdvanced(20);
+        radio.setCurrentStation(19);
+        assertEquals(19, radio.getCurrentStation());
+    }
+
+    @Test
+        // тест на уменьшение станции при станции равной мин.станции
     void shouldChangeOnPreviousRadioStationIfStationIsMin() {
-        RadioAdvanced radio = new RadioAdvanced();
+        RadioAdvanced radio = new RadioAdvanced(5);
         int currentStation = 0;
         radio.setCurrentStation(currentStation);
         radio.changeOnPreviousRadioStation();
-        int expected = 9;
-        assertEquals(expected, radio.getCurrentStation());
+        assertEquals(4, radio.getCurrentStation());
     }
 
     @Test
-    void shouldNotChangeOnNextRadioStationIfStationIsMax() {
-        RadioAdvanced radio = new RadioAdvanced();
+        // тест на уменьшение станции при станции равной макс.станции
+    void shouldChangeOnPreviousRadioStationIfStationIsMax() {
+        RadioAdvanced radio = new RadioAdvanced(10);
         int currentStation = 9;
         radio.setCurrentStation(currentStation);
-        radio.changeOnNextRadioStation();
-        int expected = 0;
-        assertEquals(expected, radio.getCurrentStation());
+        radio.changeOnPreviousRadioStation();
+        assertEquals(8, radio.getCurrentStation());
     }
 
-
     @Test
-    void shouldChangeOnPreviousRadioStation() {
-        RadioAdvanced radio = new RadioAdvanced();
-        int currentStation = 1;
+        // тест на уменьшение станции при станции выше макс.станции
+    void shouldChangeOnPreviousRadioStationIfStationIsOverMax() {
+        RadioAdvanced radio = new RadioAdvanced(45);
+        int currentStation = 50;
         radio.setCurrentStation(currentStation);
         radio.changeOnPreviousRadioStation();
-        int expected = 0;
-        assertEquals(expected, radio.getCurrentStation());
+        assertEquals(44, radio.getCurrentStation());
     }
 
+    @Test
+        //тест на уменьшение станции в пределах граничных значений
+    void shouldChangeOnPreviousRadioStation() {
+        RadioAdvanced radio = new RadioAdvanced(50);
+        int currentStation = 25;
+        radio.setCurrentStation(currentStation);
+        radio.changeOnPreviousRadioStation();
+        assertEquals(24, radio.getCurrentStation());
+    }
 
     @Test
+        //тест на уменьшение станции при отрицательном значении станции
+    void shouldChangeOnPreviousRadioStationUnderMin() {
+        RadioAdvanced radio = new RadioAdvanced(50);
+        int currentStation = -49;
+        radio.setCurrentStation(currentStation);
+        radio.changeOnPreviousRadioStation();
+        assertEquals(49, radio.getCurrentStation());
+    }
+
+    @Test
+        //тест на уменьшение станции при значении станции равном кол-ву станций
+    void shouldChangeOnPreviousRadioStationIfStationEquallyNumberOfStation() {
+        RadioAdvanced radio = new RadioAdvanced(50);
+        int currentStation = 50;
+        radio.setCurrentStation(currentStation);
+        radio.changeOnPreviousRadioStation();
+        assertEquals(48, radio.getCurrentStation());
+    }
+
+    @Test
+        //тест на увеличение станции в пределах граничных значений
     void shouldChangeOnNextRadioStation() {
-        RadioAdvanced radio = new RadioAdvanced();
-        int currentStation = 8;
+        RadioAdvanced radio = new RadioAdvanced(75);
+        int currentStation = 25;
         radio.setCurrentStation(currentStation);
         radio.changeOnNextRadioStation();
-        int expected = 9;
-        assertEquals(expected, radio.getCurrentStation());
+        assertEquals(26, radio.getCurrentStation());
     }
 
+    @Test
+        //тест на увеличение станции при отрицательном значении станции
+    void shouldChangeOnNextRadioStationIfStationIsUnderZero() {
+        RadioAdvanced radio = new RadioAdvanced(75);
+        int currentStation = -25;
+        radio.setCurrentStation(currentStation);
+        radio.changeOnNextRadioStation();
+        assertEquals(1, radio.getCurrentStation());
+    }
 
     @Test
-    void shouldSetVolumeIfVolumeIsOverMax() {
+        // тест на увеличение станции при значении станции равной мин.станции
+    void shouldChangeOnNextRadioStationIfStationIsMin() {
+        RadioAdvanced radio = new RadioAdvanced(77);
+        int currentStation = 0;
+        radio.setCurrentStation(currentStation);
+        radio.changeOnNextRadioStation();
+        assertEquals(1, radio.getCurrentStation());
+    }
+
+    @Test
+        // тест на увеличение станции при значении станции равной макс.станции
+    void shouldChangeOnNextRadioStationIfStationIsMax() {
+        RadioAdvanced radio = new RadioAdvanced(77);
+        int currentStation = 76;
+        radio.setCurrentStation(currentStation);
+        radio.changeOnNextRadioStation();
+        assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+        // тест на увеличение станции при значении станции выше макс. станции
+    void shouldChangeOnNextRadioStationIfStationIsOverMax() {
+        RadioAdvanced radio = new RadioAdvanced(100);
+        int currentStation = 110;
+        radio.setCurrentStation(currentStation);
+        radio.changeOnNextRadioStation();
+        assertEquals(1, radio.getCurrentStation());
+    }
+
+    @Test
+        // тест на увеличение станции при значении станции равной кол-ву станций
+    void shouldChangeOnNextStationIfStationIfEquallyNumberOfStation() {
+        RadioAdvanced radio = new RadioAdvanced(15);
+        int currentStation = 15;
+        radio.setCurrentStation(currentStation);
+        radio.changeOnNextRadioStation();
+        assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+        //тест на обнуление звука при превышении макс.значения звука
+    void shouldNotSetVolumeIfVolumeIsOverMax() {
         RadioAdvanced radio = new RadioAdvanced();
-        int currentVolume = 11;
-        radio.setCurrentVolume(currentVolume);
-        int expected = 0;
-        assertEquals(expected, radio.getCurrentVolume());
+        radio.setCurrentVolume(150);
+        assertEquals(0, radio.getCurrentVolume());
     }
 
     @Test
-    void shouldSetVolumeIfVolumeIsUnderMin() {
+        //тест на обнуление звука при значении звука ниже мин.значения звука
+    void shouldNotSetVolumeIfVolumeIsUnderMin() {
         RadioAdvanced radio = new RadioAdvanced();
-        int currentVolume = -1;
+        int currentVolume = -100;
         radio.setCurrentVolume(currentVolume);
-        int expected = 0;
-        assertEquals(expected, radio.getCurrentVolume());
+        assertEquals(0, radio.getCurrentVolume());
     }
 
     @Test
+        // тест на увеличение значения звука, если звук равен макс.значению звука
     void shouldNotChangeVolumeIfVolumeIsMax() {
         RadioAdvanced radio = new RadioAdvanced();
-        int currentVolume = 10;
+        int currentVolume = 100;
         radio.setCurrentVolume(currentVolume);
         radio.volumeUpForOne();
-        int expected = 10;
-        assertEquals(expected, radio.getCurrentVolume());
+        assertEquals(100, radio.getCurrentVolume());
     }
 
     @Test
+        // тест на уменьшение значения звука, если звук равен мин.значению звука
     void shouldNotChangeVolumeIfVolumeIsMin() {
         RadioAdvanced radio = new RadioAdvanced();
         int currentVolume = 0;
-        radio.setCurrentVolume(currentVolume);
         radio.volumeDownForOne();
-        int expected = 0;
-        assertEquals(expected, radio.getCurrentVolume());
-
+        radio.setCurrentVolume(currentVolume);
+        assertEquals(0, radio.getCurrentVolume());
     }
 
     @Test
+        // тест на повышение звука в пределах граничных значений
     void volumeUpForOne() {
         RadioAdvanced radio = new RadioAdvanced();
-        int currentVolume = 8;
+        int currentVolume = 55;
         radio.setCurrentVolume(currentVolume);
         radio.volumeUpForOne();
-        int expected = 9;
-        assertEquals(expected, radio.getCurrentVolume());
+        assertEquals(56, radio.getCurrentVolume());
     }
 
     @Test
+        // тест на уменьшение звука в пределах граничных значений
     void volumeDownForOne() {
         RadioAdvanced radio = new RadioAdvanced();
-        int currentVolume = 7;
+        int currentVolume = 47;
         radio.setCurrentVolume(currentVolume);
         radio.volumeDownForOne();
-        int expected = 6;
-        assertEquals(expected, radio.getCurrentVolume());
+        assertEquals(46, radio.getCurrentVolume());
+    }
 
+    @Test
+        // тест на выставление звука равному мин.значению звука
+    void shouldSetVolumeIfVolumeIsMin() {
+        RadioAdvanced radio = new RadioAdvanced();
+        radio.setCurrentVolume(0);
+        assertEquals(0, radio.getCurrentVolume());
+    }
+
+    @Test
+        // тест на выставление звука равному макс.значению звука
+    void shouldSetVolumeIfVolumeIsMax() {
+        RadioAdvanced radio = new RadioAdvanced();
+        radio.setCurrentVolume(100);
+        assertEquals(100, radio.getCurrentVolume());
     }
 
     @Test
@@ -145,16 +269,13 @@ class RadioAdvancedTest {
     }
 
     @Test
-    public void shouldInitField() {
+    public void shouldUseArgsConstructor() {
         RadioAdvanced Radio = new RadioAdvanced();
-        assertNull(Radio.getName());
-        assertEquals(9, Radio.getMaxStation());
         assertEquals(0, Radio.getMinStation());
         assertEquals(0, Radio.getCurrentStation());
-        assertEquals(10, Radio.getMaxVolumeLevel());
+        assertEquals(100, Radio.getMaxVolumeLevel());
         assertEquals(0, Radio.getMinVolumeLevel());
         assertEquals(0, Radio.getCurrentVolume());
-        assertFalse(Radio.isOn());
     }
 
     @Test
@@ -172,4 +293,3 @@ class RadioAdvancedTest {
         assertEquals(5, radio.currentStation);
     }
 }
-

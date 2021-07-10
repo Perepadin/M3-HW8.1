@@ -1,21 +1,29 @@
 package ru.netology;
 
 public class RadioAdvanced {
-    private String name;
+    private int numberOfStations = 10;
     private int currentStation = 0;
-    private int MaxStation = 9;
-    private int MinStation = 0;
+    private int minStation = 0;
     private int currentVolume = 0;
-    private int MaxVolumeLevel = 10;
-    private int MinVolumeLevel = 0;
-    private boolean on;
+    private int maxVolumeLevel = 100;
+    private int minVolumeLevel = 0;
 
-    public String getName() {
-        return name;
+    public RadioAdvanced(int numberOfStations) {
+        this.numberOfStations = numberOfStations;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public RadioAdvanced() {
+    }
+
+    public int getNumberOfStations() {
+        return numberOfStations;
+    }
+
+    public void setNumberOfStations(int numberOfStations) {
+        if (numberOfStations < 0) {
+            return;
+        }
+        this.numberOfStations = numberOfStations;
     }
 
     public int getCurrentStation() {
@@ -23,29 +31,42 @@ public class RadioAdvanced {
     }
 
     public void setCurrentStation(int currentStation) {
-        if (currentStation > MaxStation) {
+        if (currentStation > numberOfStations) {
             return;
         }
-        if (currentStation < MinStation) {
+        if (currentStation < minStation) {
+            return;
+        }
+        if (currentStation == numberOfStations) {
+            this.currentStation = numberOfStations -1;
             return;
         }
         this.currentStation = currentStation;
     }
 
-    public int getMaxStation() {
-        return MaxStation;
+    public void changeOnPreviousRadioStation() {
+        if (currentStation == minStation) {
+            this.currentStation = numberOfStations - 1;
+            return;
+        }
+        this.currentStation--;
     }
 
-    public void setMaxStation(int maxStation) {
-        MaxStation = maxStation;
+    public void changeOnNextRadioStation() {
+        if (currentStation == numberOfStations - 1) {
+            this.currentStation = minStation;
+            return;
+        }
+
+        this.currentStation++;
     }
 
     public int getMinStation() {
-        return MinStation;
+        return minStation;
     }
 
     public void setMinStation(int minStation) {
-        MinStation = minStation;
+        minStation = minStation;
     }
 
     public int getCurrentVolume() {
@@ -53,67 +74,49 @@ public class RadioAdvanced {
     }
 
     public void setCurrentVolume(int currentVolume) {
-        if (currentVolume > MaxVolumeLevel) {
+        if (currentVolume > maxVolumeLevel) {
             return;
         }
-        if (currentVolume < MinVolumeLevel) {
+        if (currentVolume < minVolumeLevel) {
             return;
         }
         this.currentVolume = currentVolume;
     }
 
     public int getMaxVolumeLevel() {
-        return MaxVolumeLevel;
+        return maxVolumeLevel;
     }
 
     public void setMaxVolumeLevel(int maxVolumeLevel) {
-        MaxVolumeLevel = maxVolumeLevel;
+        maxVolumeLevel = maxVolumeLevel;
     }
 
     public int getMinVolumeLevel() {
-        return MinVolumeLevel;
+        return minVolumeLevel;
     }
 
     public void setMinVolumeLevel(int minVolumeLevel) {
-        MinVolumeLevel = minVolumeLevel;
+        minVolumeLevel = minVolumeLevel;
     }
 
     public void volumeUpForOne() {
 
-        if (currentVolume == MaxVolumeLevel) {
+        if (currentVolume == maxVolumeLevel) {
             this.currentVolume = currentVolume;
         }
-        if (currentVolume < MaxVolumeLevel) {
+        if (currentVolume < maxVolumeLevel) {
             this.currentVolume++;
         }
     }
 
     public void volumeDownForOne() {
-        if (currentVolume == MinVolumeLevel) {
+        if (currentVolume == minVolumeLevel) {
             this.currentVolume = currentVolume;
         }
-        if (currentVolume > MinVolumeLevel) {
+        if (currentVolume > minVolumeLevel) {
             this.currentVolume--;
         }
     }
-
-    public void changeOnPreviousRadioStation() {
-        if (currentStation == MinStation) {
-            this.currentStation = 9;
-            return;
-        }
-        this.currentStation--;
-    }
-
-    public void changeOnNextRadioStation() {
-        if (currentStation == MaxStation) {
-            this.currentStation = 0;
-            return;
-        }
-        this.currentStation++;
-    }
-
-    public boolean isOn() {
-        return on;
-    }
 }
+
+
