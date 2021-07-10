@@ -24,7 +24,7 @@ class RadioAdvancedTest {
 
     @Test
         //тест на установку количества станций выше значения количества станций по умолчанию
-    void shouldSetNumbersOfStationIsOverMax() {
+    void shouldSetNumbersOfStationOverMax() {
         RadioAdvanced radio = new RadioAdvanced(10);
         radio.setNumberOfStations(15);
         assertEquals(15, radio.getNumberOfStations());
@@ -92,7 +92,7 @@ class RadioAdvancedTest {
 
     @Test
         // тест на уменьшение станции при станции выше макс.станции
-    void shouldChangeOnPreviousRadioStationIfStationIx() {
+    void shouldChangeOnPreviousRadioStationIfStationIsOverMax() {
         RadioAdvanced radio = new RadioAdvanced(45);
         int currentStation = 50;
         radio.setCurrentStation(currentStation);
